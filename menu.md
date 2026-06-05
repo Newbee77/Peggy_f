@@ -7,8 +7,8 @@
 ## Alltid på Peggy´s
 
 	## Förrätt
-	| Punkt | Rätt | Pris |
-	| --- | --- | --- | 	 
+	| Rätt | Pris |
+	| --- | --- | 	 
  	* | Räkröra på Peggy´s grova bröd | 140kr
  	* | Gubbröra på Peggy´s grova bröd | 95kr
  	* | Stektsill på Peggy´s grova bröd | 130kr
