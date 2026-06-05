@@ -25,4 +25,4 @@ python3 -m http.server 8000
 # sedan öppna http://localhost:8000
 ```
 
-Uppdatera `menu.md`, `about.md` och `contact.md` för att ändra innehållet. Kör `build_gallery.py` igen efter att ha lagt till eller tagit bort bilder.
+Uppdatera `menu.md`, `about.md` och `contact.md` för att ändra innehållet.
