@@ -90,6 +90,22 @@ document.addEventListener('DOMContentLoaded',()=>{
   loadText('menu.md','menu-content');
   loadText('contact.md','contact-content');
   loadGallery();
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const nav = document.getElementById('main-nav');
+  if(navToggle && nav){
+    navToggle.addEventListener('click', ()=>{
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('open');
+    });
+    nav.querySelectorAll('a').forEach(link=>{
+      link.addEventListener('click', ()=>{
+        nav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 });
 
 // Lightbox: attach after gallery loaded
