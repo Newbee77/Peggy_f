@@ -10,15 +10,49 @@ async function loadText(file, containerId){
 }
 
 function renderMarkdown(md){
-  // Mycket enkel markdown -> HTML (rubriker, paragraf, listor)
+  // Mycket enkel markdown -> HTML (rubriker, paragraf, listor, tabeller)
   let html = '';
   let inList = false;
+  let inTable = false;
+  let tableLines = [];
   let paragraphLines = [];
 
   const applyInlineFormatting = (text) => {
     return escapeHtml(text)
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/__(.+?)__/g, '<strong>$1</strong>');
+  };
+
+  const renderTable = (lines) => {
+    if(!lines.length) return '';
+    const rows = lines.map(line => line.replace(/^\||\|$/g, '').split('|').map(cell => applyInlineFormatting(cell.trim())));
+    let bodyStart = 1;
+    const dividerRow = rows.length > 1 ? rows[1] : [];
+    const isDivider = dividerRow.length && dividerRow.every(cell => /^:?-+:?$/.test(cell));
+    if(isDivider) bodyStart = 2;
+
+    let tableHtml = '<table><thead><tr>';
+    rows[0].forEach(cell => { tableHtml += `<th>${cell}</th>`; });
+    tableHtml += '</tr></thead><tbody>';
+
+    for(let i = bodyStart; i < rows.length; i++){
+      const row = rows[i];
+      if(row.every(cell => cell === '')) continue;
+      tableHtml += '<tr>';
+      row.forEach(cell => { tableHtml += `<td>${cell}</td>`; });
+      tableHtml += '</tr>';
+    }
+
+    tableHtml += '</tbody></table>';
+    return tableHtml;
+  };
+
+  const closeTable = () => {
+    if(inTable){
+      html += renderTable(tableLines);
+      tableLines = [];
+      inTable = false;
+    }
   };
 
   const closeList = () => {
@@ -35,9 +69,23 @@ function renderMarkdown(md){
   md.split('\n').forEach(line => {
     const trimmed = line.trim();
     if(!trimmed){
+      closeTable();
       closeList();
       flushParagraph();
       return;
+    }
+
+    const isTableLine = trimmed.includes('|') && trimmed.split('|').length >= 3;
+    if(isTableLine){
+      closeList();
+      flushParagraph();
+      inTable = true;
+      tableLines.push(trimmed);
+      return;
+    }
+
+    if(inTable){
+      closeTable();
     }
 
     if(trimmed.startsWith('# ')){
@@ -66,6 +114,7 @@ function renderMarkdown(md){
     paragraphLines.push(trimmed);
   });
 
+  closeTable();
   closeList();
   flushParagraph();
   return html;

@@ -6,10 +6,12 @@
 	
 ## Alltid på Peggy´s
 
-	## Förrätt	 
- 	* Räkröra på Peggy´s grova bröd	140kr
- 	* Gubbröra på Peggy´s grova bröd	  95kr
- 	* Stektsill på Peggy´s grova bröd	130kr
+	## Förrätt
+	| Punkt | Rätt | Pris |
+	| --- | --- | --- | 	 
+ 	* | Räkröra på Peggy´s grova bröd | 140kr
+ 	* | Gubbröra på Peggy´s grova bröd | 95kr
+ 	* | Stektsill på Peggy´s grova bröd | 130kr
  	## Huvudrätt	 
  	* Stekt sill med mos,rårörda lingon, bryntsmör och senapssås	150kr
  	* Räkmacka, hemmabakat bröd, handpilladeräkor, ägg, majonäs, dill & citron	180kr	 

@@ -39,6 +39,10 @@ section{background:white;padding:22px;margin:22px 0;border-radius:10px;box-shado
 .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;z-index:50;padding:24px}
 .lightbox img{max-width:92%;max-height:92%;border-radius:6px}
 
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:0.95rem}
+th, td{border:1px solid rgba(0,0,0,0.1);padding:12px;text-align:left}
+th{background:rgba(11,107,90,0.08);font-weight:600}
+
 /* Responsive */
 @media (max-width:700px){
   .header-inner{flex-wrap:wrap;justify-content:space-between;gap:12px}
